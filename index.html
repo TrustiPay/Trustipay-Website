@@ -1,975 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TrustiPay - Inclusive, Intelligent Digital Payments</title>
-  <style>
-    :root {
-      --bg: #06111f;
-      --bg-soft: #0b1b2f;
-      --card: rgba(15, 31, 52, 0.72);
-      --card-border: rgba(129, 208, 181, 0.18);
-      --text: #e9f6ff;
-      --muted: #a8bfd0;
-      --primary: #1e4f86;
-      --secondary: #71c89a;
-      --accent: #2aa7c8;
-      --glow: 0 20px 60px rgba(15, 111, 174, 0.25);
-      --radius: 24px;
-      --max: 1200px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(42,167,200,0.18), transparent 28%),
-        radial-gradient(circle at 85% 10%, rgba(113,200,154,0.14), transparent 24%),
-        linear-gradient(180deg, #030913 0%, #06111f 42%, #071425 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 95%);
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(calc(100% - 2rem), var(--max));
-      margin: 0 auto;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: rgba(3, 9, 19, 0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.9rem 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 18px rgba(113,200,154,0.2));
-    }
-
-    .brand span {
-      font-size: 1.05rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 0.95rem 1.3rem;
-      border-radius: 999px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
-      cursor: pointer;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: var(--glow);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(255,255,255,0.12);
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 4.5rem 0 3rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(113,200,154,0.09);
-      color: #bff2d5;
-      border: 1px solid rgba(113,200,154,0.14);
-      font-size: 0.86rem;
-      margin-bottom: 1.1rem;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 5vw, 5.2rem);
-      line-height: 0.96;
-      margin: 0 0 1.1rem;
-      letter-spacing: -0.04em;
-      max-width: 11ch;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #ffffff, #8dc8ff 35%, #86d9b1 85%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 60ch;
-      line-height: 1.75;
-      margin: 0 0 1.5rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .stat {
-      min-width: 140px;
-      padding: 1rem 1.1rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.25rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .hero-visual {
-      position: relative;
-      min-height: 540px;
-      display: grid;
-      place-items: center;
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(16px);
-      opacity: 0.6;
-    }
-
-    .orb.one {
-      width: 220px;
-      height: 220px;
-      background: rgba(42,167,200,0.24);
-      top: 8%;
-      right: 14%;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .orb.two {
-      width: 180px;
-      height: 180px;
-      background: rgba(113,200,154,0.2);
-      left: 8%;
-      bottom: 8%;
-      animation: float 10s ease-in-out infinite reverse;
-    }
-
-    .phone-stack {
-      position: relative;
-      width: min(100%, 500px);
-      aspect-ratio: 1 / 1;
-    }
-
-    .phone {
-      position: absolute;
-      width: 210px;
-      border-radius: 28px;
-      padding: 12px;
-      background: linear-gradient(180deg, rgba(11,27,47,0.96), rgba(9,20,36,0.98));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.34);
-      overflow: hidden;
-    }
-
-    .phone::before {
-      content: "";
-      display: block;
-      width: 42%;
-      height: 18px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 999px;
-      margin: 0 auto 14px;
-    }
-
-    .phone.screen-1 { left: 6%; top: 18%; transform: rotate(-10deg); }
-    .phone.screen-2 { right: 3%; top: 4%; transform: rotate(8deg); }
-    .phone.screen-3 { left: 24%; bottom: 2%; transform: rotate(-2deg); }
-
-    .screen {
-      border-radius: 20px;
-      padding: 1rem;
-      min-height: 360px;
-      background:
-        radial-gradient(circle at top, rgba(42,167,200,0.18), transparent 30%),
-        linear-gradient(180deg, #091221, #0c1730 50%, #0b1222 100%);
-    }
-
-    .screen-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      color: #d9f4ff;
-    }
-
-    .screen-logo img {
-      width: 26px;
-      height: 26px;
-      object-fit: contain;
-    }
-
-    .widget, .widget-sm {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      padding: 0.9rem;
-      margin-bottom: 0.85rem;
-    }
-
-    .widget h4, .widget-sm h4 {
-      margin: 0 0 0.4rem;
-      font-size: 0.94rem;
-    }
-
-    .widget p, .widget-sm p {
-      margin: 0;
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .balance {
-      background: linear-gradient(135deg, rgba(30,79,134,0.95), rgba(113,200,154,0.3));
-      border: 1px solid rgba(143,225,197,0.3);
-    }
-
-    .balance strong {
-      display: block;
-      font-size: 1.55rem;
-      margin-top: 0.35rem;
-    }
-
-    .pill-row {
-      display: flex;
-      gap: 0.55rem;
-      flex-wrap: wrap;
-      margin-top: 0.75rem;
-    }
-
-    .pill {
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      font-size: 0.78rem;
-      color: #d4ebff;
-    }
-
-    section { padding: 3rem 0; }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: end;
-      margin-bottom: 1.6rem;
-    }
-
-    .section-heading h2 {
-      margin: 0;
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      letter-spacing: -0.03em;
-    }
-
-    .section-heading p {
-      margin: 0;
-      max-width: 62ch;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .grid-4, .grid-3 {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 1.3rem;
-      box-shadow: var(--glow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: auto -10% -45% auto;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(113,200,154,0.22), transparent 65%);
-      pointer-events: none;
-    }
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(42,167,200,0.22), rgba(113,200,154,0.24));
-      border: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 0.9rem;
-      font-size: 1.2rem;
-    }
-
-    .card h3 {
-      margin: 0 0 0.6rem;
-      font-size: 1.08rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .journey {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-
-    .step {
-      padding: 1.2rem;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      position: relative;
-    }
-
-    .step-number {
-      display: inline-grid;
-      place-items: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      font-weight: 800;
-      margin-bottom: 0.8rem;
-    }
-
-    .step p {
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      align-items: stretch;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 0.85rem;
-      margin-bottom: 1rem;
-      align-items: flex-start;
-    }
-
-    .timeline-item:last-child { margin-bottom: 0; }
-
-    .timeline-bullet {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--secondary));
-      margin-top: 0.5rem;
-      box-shadow: 0 0 0 7px rgba(113,200,154,0.1);
-      flex: 0 0 auto;
-    }
-
-    .timeline-item h4 {
-      margin: 0 0 0.25rem;
-      font-size: 1rem;
-    }
-
-    .timeline-item p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.94rem;
-    }
-
-    .pricing {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 100%;
-    }
-
-    .pricing .price {
-      font-size: 2rem;
-      font-weight: 800;
-      margin: 0.5rem 0;
-    }
-
-    .list {
-      display: grid;
-      gap: 0.7rem;
-      margin-top: 1rem;
-    }
-
-    .list div {
-      display: flex;
-      gap: 0.6rem;
-      align-items: flex-start;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .list span {
-      color: #bff2d5;
-      font-weight: 800;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 2rem;
-      border-radius: 30px;
-      background:
-        radial-gradient(circle at top, rgba(42,167,200,0.18), transparent 40%),
-        linear-gradient(180deg, rgba(10,24,42,0.92), rgba(7,17,31,0.95));
-      border: 1px solid rgba(113,200,154,0.16);
-      box-shadow: var(--glow);
-    }
-
-    .cta h2 {
-      margin: 0 0 0.7rem;
-      font-size: clamp(2rem, 3vw, 3.4rem);
-      letter-spacing: -0.04em;
-    }
-
-    .cta p {
-      margin: 0 auto 1.2rem;
-      color: var(--muted);
-      max-width: 60ch;
-      line-height: 1.8;
-    }
-
-    .footer {
-      padding: 1.4rem 0 2.5rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 600ms ease, transform 600ms ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .menu-btn {
-      display: none;
-      background: transparent;
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      padding: 0.65rem 0.8rem;
-      font-size: 1rem;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-18px); }
-    }
-
-    @media (max-width: 1024px) {
-      .hero-grid,
-      .split,
-      .journey,
-      .grid-4,
-      .grid-3 {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero-visual { min-height: 500px; }
-    }
-
-    @media (max-width: 760px) {
-      .nav-links {
-        position: absolute;
-        top: calc(100% + 0.75rem);
-        left: 1rem;
-        right: 1rem;
-        display: none;
-        flex-direction: column;
-        padding: 1rem;
-        border-radius: 18px;
-        background: rgba(5, 12, 23, 0.96);
-        border: 1px solid rgba(255,255,255,0.08);
-      }
-
-      .nav-links.open { display: flex; }
-      .menu-btn { display: inline-flex; }
-
-      .hero-grid,
-      .split,
-      .journey,
-      .grid-4,
-      .grid-3,
-      .section-heading {
-        grid-template-columns: 1fr;
-        display: grid;
-      }
-
-      .section-heading { gap: 0.8rem; }
-      .nav-inner .btn-primary { display: none; }
-      .hero { padding-top: 3rem; }
-      h1 { max-width: 100%; }
-      .hero-visual { min-height: 430px; }
-      .phone { width: 170px; }
-      .screen { min-height: 300px; }
-      .footer-inner { flex-direction: column; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reveal, .btn, .orb { transition: none; animation: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TrustiPay research project website for an AI powered, bilingual and offline enabled digital payment platform.">
+    <title>TrustiPay - Research Project</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand">
-        <img src="logo.png" alt="TrustiPay logo" />
-        <span>TrustiPay</span>
-      </a>
+<body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    <nav class="navbar" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="TrustiPay home">
+            <img src="assets/TrustiPay Logo - 3 - Transparent.png" alt="TrustiPay logo" class="logo">
+            <span>TrustiPay</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu">
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"><span></span></label>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#domain">Domain</a></li>
+            <li><a href="#milestones">Milestones</a></li>
+            <li><a href="#documents">Documents</a></li>
+            <li><a href="#slides">Slides</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
 
-      <div class="nav-links" id="navLinks">
-        <a href="#features">Features</a>
-        <a href="#workflow">How it works</a>
-        <a href="#modules">Modules</a>
-        <a href="#commercialization">Business model</a>
-      </div>
-
-      <a class="btn btn-primary" href="#cta">Request a Demo</a>
-    </div>
-  </nav>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">AI-powered • Inclusive • Multilingual • Offline-enabled</div>
-          <h1><span class="gradient-text">Digital payments built on trust.</span></h1>
-          <p>
-            TrustiPay is an inclusive digital payment platform designed to make transactions safer,
-            smarter, and more accessible. It combines AI-powered fraud detection, voice-guided UX,
-            resilient offline value transfer, and personalized financial insights in one unified experience.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#cta">Get Started</a>
-            <a class="btn btn-secondary" href="#workflow">Explore Platform</a>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <strong>4 core modules</strong>
-              <span>One integrated trust stack</span>
-            </div>
-            <div class="stat">
-              <strong>Offline-ready</strong>
-              <span>Payments continue in weak networks</span>
-            </div>
-            <div class="stat">
-              <strong>Multilingual UX</strong>
-              <span>Built for wider accessibility</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal">
-          <div class="orb one"></div>
-          <div class="orb two"></div>
-          <div class="phone-stack">
-            <div class="phone screen-1">
-              <div class="screen">
-                <div class="screen-logo">
-                  <img src="logo.png" alt="TrustiPay icon" />
-                  TrustiPay
+    <main id="main-content">
+        <header id="home" class="hero section">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">AI powered - bilingual - offline enabled</p>
+                    <h1>Digital payments built on trust, access, and resilience.</h1>
+                    <p class="hero-text">TrustiPay is a prototype digital payment platform that combines safe voice-assisted interaction, adaptive fraud decisioning, controlled offline value transfer, and interpretable financial guidance within one payment lifecycle.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#domain">Explore Domain</a>
+                        <a class="btn btn-secondary" href="#documents">View Documents</a>
+                    </div>
                 </div>
-                <div class="widget balance">
-                  <p>Available balance</p>
-                  <strong>LKR 125,000</strong>
-                  <div class="pill-row">
-                    <div class="pill">Live ledger</div>
-                    <div class="pill">Secure sync</div>
-                  </div>
+                <div class="hero-panel" aria-label="TrustiPay feature summary">
+                    <img src="assets/TrustiPay Logo - 4 - Transparent.png" alt="TrustiPay wordmark" class="hero-logo">
+                    <div class="wallet-card">
+                        <span class="status-dot"></span>
+                        <p class="wallet-label">Prototype focus</p>
+                        <h2>Inclusive, secure payments</h2>
+                        <p>Guided online payments, fraud review, offline syncing, and post-transaction insights.</p>
+                    </div>
+                    <div class="mini-grid">
+                        <span>Voice guidance</span>
+                        <span>Hybrid fraud AI</span>
+                        <span>Offline ledger</span>
+                        <span>Financial insights</span>
+                    </div>
                 </div>
-                <div class="widget-sm">
-                  <h4>Pay with Voice</h4>
-                  <p>Step-by-step, safer guidance for inclusive digital payments.</p>
+            </div>
+        </header>
+
+        <section class="section bg-light" aria-labelledby="site-index-title">
+            <div class="container">
+                <div class="section-heading compact">
+                    <p class="eyebrow">Site index</p>
+                    <h2 id="site-index-title">Find each required website area quickly</h2>
+                    <p>The website is organized according to the required project website structure.</p>
                 </div>
-              </div>
-            </div>
-
-            <div class="phone screen-2">
-              <div class="screen">
-                <div class="screen-logo">
-                  <img src="logo.png" alt="TrustiPay icon" />
-                  TrustiPay AI
+                <div class="index-grid">
+                    <a href="#home">Home</a>
+                    <a href="#domain">Domain</a>
+                    <a href="#milestones">Milestones</a>
+                    <a href="#documents">Documents</a>
+                    <a href="#slides">Slides</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact Us</a>
                 </div>
-                <div class="widget">
-                  <h4>Fraud Risk Monitor</h4>
-                  <p>Hybrid scoring engine classifies suspicious activity into approve, verify, or block.</p>
+            </div>
+        </section>
+
+        <section id="domain" class="section" aria-labelledby="domain-title">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Domain</p>
+                    <h2 id="domain-title">Domain details gathered from the literature survey</h2>
+                    <p>TrustiPay studies the combined problem of digital payment accessibility, fraud exposure, unstable connectivity, and the limited decision value of raw transaction records.</p>
                 </div>
-                <div class="widget">
-                  <h4>Voice Navigation</h4>
-                  <p>Local-first speech understanding with deterministic state-driven UI actions.</p>
+
+                <div class="domain-grid">
+                    <article class="card feature-card span-2">
+                        <h3>Literature Survey</h3>
+                        <p>Digital payment systems improve financial inclusion, but voice-enabled financial systems often lack safety-bounded execution and multilingual support for low-resource languages. Existing fraud detection research uses supervised and anomaly-based machine learning, but real deployments still face class imbalance, concept drift, and false positives. Offline payment research supports device-level processing, local ledgers, and delayed synchronization, but must handle ordering, replay resistance, and double-spend prevention. Financial analytics systems can visualize spending, but many still provide fragmented summaries instead of actionable financial guidance.</p>
+                    </article>
+                    <article class="card feature-card">
+                        <h3>Research Gap</h3>
+                        <p>Prior work usually treats accessibility, fraud detection, offline payments, and analytics as separate areas. TrustiPay addresses the architectural gap by coordinating them inside one shared transaction lifecycle.</p>
+                    </article>
+                    <article class="card feature-card">
+                        <h3>Research Problem</h3>
+                        <p>Users need a digital payment platform that remains usable, trustworthy, and secure when language barriers, visual or age-related accessibility needs, fraud risk, and poor connectivity occur together.</p>
+                    </article>
+                    <article class="card feature-card span-2">
+                        <h3>Research Objectives</h3>
+                        <ul class="check-list">
+                            <li>Design a safe bilingual voice-assisted payment experience where sensitive actions still require explicit confirmation.</li>
+                            <li>Build a hybrid fraud decision service that maps risk into allow, OTP challenge, or block actions.</li>
+                            <li>Support offline peer-to-peer transfers through a tamper-evident local ledger and deferred fraud review after synchronization.</li>
+                            <li>Convert confirmed transaction histories into interpretable financial health scores, behavioral profiles, and personalized guidance.</li>
+                        </ul>
+                    </article>
+                    <article class="card feature-card">
+                        <h3>Methodology</h3>
+                        <p>The project follows a prototype-oriented systems methodology. The Android client manages wallet interaction, confirmation, voice guidance, and temporary local storage. Modular FastAPI services handle fraud and risk evaluation, transaction orchestration with offline support, and financial analytics.</p>
+                    </article>
+                    <article class="card feature-card">
+                        <h3>Technologies Used</h3>
+                        <ul class="tag-list">
+                            <li>Android client</li>
+                            <li>FastAPI backend</li>
+                            <li>SQLite local deployment</li>
+                            <li>Isolation Forest</li>
+                            <li>Random Forest</li>
+                            <li>OTP verification</li>
+                            <li>QR, Wi-Fi Direct, Bluetooth</li>
+                            <li>Hash-linked ledger</li>
+                        </ul>
+                    </article>
                 </div>
-              </div>
             </div>
+        </section>
 
-            <div class="phone screen-3">
-              <div class="screen">
-                <div class="screen-logo">
-                  <img src="logo.png" alt="TrustiPay icon" />
-                  Insights
+        <section class="section bg-light" aria-labelledby="architecture-title">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Platform summary</p>
+                    <h2 id="architecture-title">One lifecycle for interaction, risk, continuity, and insight</h2>
                 </div>
-                <div class="widget">
-                  <h4>Financial Health</h4>
-                  <p>Personalized saving signals and behavior analytics for better money decisions.</p>
+                <div class="process-grid">
+                    <article class="process-step">
+                        <span>01</span>
+                        <h3>Guided interaction</h3>
+                        <p>Voice guidance assists navigation and parameter prefilling, while transaction commitment remains protected by explicit confirmation.</p>
+                    </article>
+                    <article class="process-step">
+                        <span>02</span>
+                        <h3>Adaptive fraud decisioning</h3>
+                        <p>Anomaly-aware scoring and supervised classification produce a risk state that becomes allow, OTP challenge, or block.</p>
+                    </article>
+                    <article class="process-step">
+                        <span>03</span>
+                        <h3>Controlled offline execution</h3>
+                        <p>Disconnected payments are stored locally, synchronized later, and finalized only after signature checks, duplicate handling, ordering checks, and fraud review.</p>
+                    </article>
+                    <article class="process-step">
+                        <span>04</span>
+                        <h3>Financial guidance</h3>
+                        <p>Confirmed transactions feed financial health scoring, behavior profiles, top contributing factors, and personalized recommendations.</p>
+                    </article>
                 </div>
-                <div class="widget-sm">
-                  <h4>Offline QR</h4>
-                  <p>Store-and-forward transfers designed for unstable connectivity conditions.</p>
+            </div>
+        </section>
+
+        <section id="milestones" class="section" aria-labelledby="milestones-title">
+            <div class="container narrow">
+                <div class="section-heading">
+                    <p class="eyebrow">Milestones</p>
+                    <h2 id="milestones-title">Project assessments</h2>
+                    <p>Select an assessment from the drop-down menu to view its date, marks allocation, and description.</p>
                 </div>
-              </div>
+
+                <label for="milestone-select" class="form-label">Choose a milestone</label>
+                <select id="milestone-select" class="dropdown">
+                    <option value="none">-- Select a milestone --</option>
+                    <option value="proposal">Project Proposal</option>
+                    <option value="progress1">Progress Presentation - 1</option>
+                    <option value="progress2">Progress Presentation - 2</option>
+                    <option value="final">Final Assessment</option>
+                    <option value="viva">Viva</option>
+                </select>
+
+                <div id="milestone-details" class="card milestone-card" hidden>
+                    <h3 id="m-title"></h3>
+                    <p><strong>Date:</strong> <span id="m-date"></span></p>
+                    <p><strong>Marks Allocated:</strong> <span id="m-marks"></span></p>
+                    <p><strong>Description:</strong> <span id="m-desc"></span></p>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section id="features">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div>
-            <div class="eyebrow">Why TrustiPay</div>
-            <h2>Built for accessibility, resilience, and trust</h2>
-          </div>
-          <p>
-            TrustiPay addresses key adoption barriers in digital payments by improving accessibility,
-            strengthening fraud protection, supporting local languages, and enabling transactions even when internet access is unreliable.
-          </p>
-        </div>
-
-        <div class="grid-4">
-          <article class="card reveal">
-            <div class="icon">🛡️</div>
-            <h3>AI Fraud Protection</h3>
-            <p>Hybrid anomaly detection and supervised classification help detect both known and emerging fraud patterns in real time.</p>
-          </article>
-          <article class="card reveal">
-            <div class="icon">🎙️</div>
-            <h3>Voice-Controlled UX</h3>
-            <p>Inclusive voice guidance supports visually impaired, elderly, and motor-limited users with safer step-by-step interaction.</p>
-          </article>
-          <article class="card reveal">
-            <div class="icon">📶</div>
-            <h3>Offline Value Transfer</h3>
-            <p>Device-to-device transactions continue during poor connectivity and sync back to the main ledger when the network returns.</p>
-          </article>
-          <article class="card reveal">
-            <div class="icon">📊</div>
-            <h3>Financial Health Insights</h3>
-            <p>Behavior analytics and ML-based recommendations help users understand spending patterns and improve savings outcomes.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="workflow">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div>
-            <div class="eyebrow">How it works</div>
-            <h2>Trust-driven payment flow</h2>
-          </div>
-          <p>
-            From voice input and fraud scoring to offline execution and personalized advice,
-            TrustiPay combines multiple intelligence layers into a single payment experience.
-          </p>
-        </div>
-
-        <div class="journey">
-          <div class="step reveal">
-            <div class="step-number">1</div>
-            <h3>Capture</h3>
-            <p>User input begins through touch or voice, with multilingual and accessibility-first interaction patterns.</p>
-          </div>
-          <div class="step reveal">
-            <div class="step-number">2</div>
-            <h3>Understand</h3>
-            <p>Local speech processing and controlled reasoning interpret intent while a state machine ensures safe navigation.</p>
-          </div>
-          <div class="step reveal">
-            <div class="step-number">3</div>
-            <h3>Protect</h3>
-            <p>AI-powered transaction surveillance assigns risk and triggers approval, verification, or blocking actions.</p>
-          </div>
-          <div class="step reveal">
-            <div class="step-number">4</div>
-            <h3>Complete</h3>
-            <p>Payments finalize online or offline, then sync securely to maintain ledger integrity and continuity.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="modules">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div>
-            <div class="eyebrow">Core solution modules</div>
-            <h2>One platform. Four strategic capabilities.</h2>
-          </div>
-          <p>
-            TrustiPay’s architecture combines secure transaction handling with inclusive experiences and actionable intelligence.
-          </p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card reveal">
-            <h3>Voice Controlled Dynamic & Inclusive Payment Interface</h3>
-            <p>Designed for users who struggle with visually heavy interfaces, combining safer guided flows with local voice execution.</p>
-          </article>
-          <article class="card reveal">
-            <h3>AI-Powered Fraud Detection & Transaction Surveillance</h3>
-            <p>Uses anomaly detection and multi-stage Random Forest scoring to reduce false positives while capturing suspicious behavior.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Resilient Money Movement & Offline Value Module</h3>
-            <p>Supports tamper-evident local ledgers, double-spend resistance, and recovery syncing after connectivity is restored.</p>
-          </article>
-          <article class="card reveal">
-            <h3>AI-Based User Behaviour Analytics</h3>
-            <p>Predicts savings trends, financial health levels, and personalized recommendations using behavior-aware ML features.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Multilingual Accessibility</h3>
-            <p>Expands digital payment adoption by reducing language barriers and enabling broader, more human-centered usability.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Resilient Trust Layer</h3>
-            <p>Combines fraud defense, explainable workflows, voice safety, and offline survivability to increase confidence in every payment.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container split">
-        <div class="card reveal">
-          <div class="eyebrow">Technical highlights</div>
-          <div class="timeline-item">
-            <div class="timeline-bullet"></div>
-            <div>
-              <h4>Local-first voice pipeline</h4>
-              <p>Microphone input, voice activity detection, speech-to-text, agent reasoning, and speech response work together for guided interactions.</p>
+        <section id="documents" class="section bg-light" aria-labelledby="documents-title">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Documents</p>
+                    <h2 id="documents-title">Project documents</h2>
+                    <p>Produced and pending documents are listed as links for review.</p>
+                </div>
+                <div class="resource-grid">
+                    <article class="resource-card available">
+                        <span class="resource-status">Available</span>
+                        <h3>TrustiPay Research Paper</h3>
+                        <p>AI powered, bilingual and offline enabled digital payment platform research paper.</p>
+                        <a href="documents/TrustiPay-Research-Paper.pdf" download>Download PDF</a>
+                    </article>
+                    <article class="resource-card pending">
+                        <span class="resource-status">Pending</span>
+                        <h3>Project Charter</h3>
+                        <p>Group charter and scope document.</p>
+                        <a href="#contact" aria-label="Request Project Charter from the team">Request link</a>
+                    </article>
+                    <article class="resource-card pending">
+                        <span class="resource-status">Pending</span>
+                        <h3>Proposal Document</h3>
+                        <p>Formal proposal document for the research project.</p>
+                        <a href="#contact" aria-label="Request Proposal Document from the team">Request link</a>
+                    </article>
+                    <article class="resource-card pending">
+                        <span class="resource-status">Pending</span>
+                        <h3>Checklist Documents</h3>
+                        <p>Assessment checklist documents and submission records.</p>
+                        <a href="#contact" aria-label="Request Checklist Documents from the team">Request link</a>
+                    </article>
+                    <article class="resource-card pending">
+                        <span class="resource-status">Pending</span>
+                        <h3>Final Main Document</h3>
+                        <p>Main final report document.</p>
+                        <a href="#contact" aria-label="Request Final Main Document from the team">Request link</a>
+                    </article>
+                    <article class="resource-card pending">
+                        <span class="resource-status">Pending</span>
+                        <h3>Individual Final Reports</h3>
+                        <p>Individual final documents for group member contributions.</p>
+                        <a href="#contact" aria-label="Request Individual Final Reports from the team">Request link</a>
+                    </article>
+                </div>
             </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-bullet"></div>
-            <div>
-              <h4>State-machine-driven safety</h4>
-              <p>LLMs assist understanding, while deterministic navigation logic protects sensitive payment tasks from unsafe execution paths.</p>
+        </section>
+
+        <section id="slides" class="section" aria-labelledby="slides-title">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Slides of past presentations</p>
+                    <h2 id="slides-title">Presentation slides</h2>
+                    <p>This area keeps links for completed presentation decks and placeholders for future presentations.</p>
+                </div>
+                <div class="timeline">
+                    <article class="timeline-item pending">
+                        <span>01</span>
+                        <div>
+                            <h3>Proposal Presentation</h3>
+                            <p>Status: pending upload.</p>
+                            <a href="#contact">Request slides</a>
+                        </div>
+                    </article>
+                    <article class="timeline-item pending">
+                        <span>02</span>
+                        <div>
+                            <h3>Progress Presentation - 1</h3>
+                            <p>Status: pending upload.</p>
+                            <a href="#contact">Request slides</a>
+                        </div>
+                    </article>
+                    <article class="timeline-item pending">
+                        <span>03</span>
+                        <div>
+                            <h3>Progress Presentation - 2</h3>
+                            <p>Status: pending upload.</p>
+                            <a href="#contact">Request slides</a>
+                        </div>
+                    </article>
+                    <article class="timeline-item pending">
+                        <span>04</span>
+                        <div>
+                            <h3>Final Presentation</h3>
+                            <p>Status: reserved for final presentation deck.</p>
+                            <a href="#contact">Request slides</a>
+                        </div>
+                    </article>
+                </div>
             </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-bullet"></div>
-            <div>
-              <h4>Hybrid fraud decisioning</h4>
-              <p>Risk scoring maps directly into actions such as approve, OTP verification, or block-and-alert outcomes.</p>
+        </section>
+
+        <section id="about" class="section bg-light" aria-labelledby="about-title">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">About us</p>
+                    <h2 id="about-title">Research team</h2>
+                    <p>Faculty of Computing, Sri Lanka Institute of Information Technology, Malabe, Sri Lanka.</p>
+                </div>
+                <div class="team-grid">
+                    <article class="team-card">
+                        <div class="avatar">DS</div>
+                        <h3>Saparamadu D.D.D.T</h3>
+                        <p>Student Researcher</p>
+                        <a href="mailto:devramsaparamadu@gmail.com">devramsaparamadu@gmail.com</a>
+                    </article>
+                    <article class="team-card">
+                        <div class="avatar">KN</div>
+                        <h3>Nadeeshani K.M.I</h3>
+                        <p>Student Researcher</p>
+                        <a href="mailto:imeshanadeeshani761@gmail.com">imeshanadeeshani761@gmail.com</a>
+                    </article>
+                    <article class="team-card">
+                        <div class="avatar">CW</div>
+                        <h3>Weligamage C.N</h3>
+                        <p>Student Researcher</p>
+                        <a href="mailto:chinthanaweligamage1@gmail.com">chinthanaweligamage1@gmail.com</a>
+                    </article>
+                    <article class="team-card">
+                        <div class="avatar">DK</div>
+                        <h3>Kiriella K.A.D.N</h3>
+                        <p>Student Researcher</p>
+                        <a href="mailto:dilmanikiriella@gmail.com">dilmanikiriella@gmail.com</a>
+                    </article>
+                    <article class="team-card supervisor">
+                        <div class="avatar">AG</div>
+                        <h3>Anjalie Gamage</h3>
+                        <p>Supervisor</p>
+                        <a href="mailto:anjalie.g@sliit.lk">anjalie.g@sliit.lk</a>
+                    </article>
+                    <article class="team-card supervisor">
+                        <div class="avatar">DD</div>
+                        <h3>Dhammika De Silva</h3>
+                        <p>Co-supervisor</p>
+                        <a href="mailto:dhammika.d@sliit.lk">dhammika.d@sliit.lk</a>
+                    </article>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <section id="contact" class="section" aria-labelledby="contact-title">
+            <div class="container contact-grid">
+                <div>
+                    <p class="eyebrow">Contact us</p>
+                    <h2 id="contact-title">Get in touch with the TrustiPay team</h2>
+                    <p>Use the general email template below for project-related inquiries, document requests, and presentation slide requests.</p>
+                    <div class="contact-list">
+                        <p><strong>General Email:</strong> <a href="mailto:info@trustipay.online">info@trustipay.online</a></p>
+                        <p><strong>Group ID:</strong> 25-26J-247</p>
+                        <p><strong>General Phone:</strong> To be updated by the project team</p>
+                    </div>
+                    <div class="email-template">
+                        <h3>General email template</h3>
+                        <p><strong>Subject:</strong> TrustiPay Project Inquiry - [Your topic]</p>
+                        <p><strong>Message:</strong> Hello TrustiPay team, I would like to ask about [document / presentation / project information]. Please share the relevant details when available. Thank you.</p>
+                    </div>
+                </div>
+                <form class="contact-form" action="mailto:info@trustipay.online" method="post" enctype="text/plain">
+                    <label>
+                        Your Name
+                        <input type="text" name="name" placeholder="Enter your name" required>
+                    </label>
+                    <label>
+                        Your Email
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                    </label>
+                    <label>
+                        Message
+                        <textarea name="message" rows="6" placeholder="Write your message" required></textarea>
+                    </label>
+                    <button type="submit" class="btn btn-primary">Prepare Email</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 TrustiPay Research Project. SLIIT Faculty of Computing.</p>
+            <a href="#top">Back to top</a>
         </div>
+    </footer>
 
-        <div class="card reveal" id="commercialization">
-          <div class="pricing">
-            <div>
-              <div class="eyebrow">Commercialization</div>
-              <h3>Simple business model with adoption in mind</h3>
-              <div class="price">Free trial → Revenue growth</div>
-              <p>
-                TrustiPay is positioned for market adoption with an introductory free trial period,
-                transaction-based merchant revenue, and secondary analytics-driven income opportunities.
-              </p>
-              <div class="list">
-                <div><span>•</span> Free trial period of 6–12 months to encourage early adoption</div>
-                <div><span>•</span> Primary revenue through merchant transaction fees</div>
-                <div><span>•</span> Secondary revenue from AI-driven insights for SMEs, lenders, and insurers</div>
-              </div>
-            </div>
-            <div style="margin-top: 1.3rem;">
-              <a class="btn btn-primary" href="#cta">Partner with TrustiPay</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <script>
+        const milestones = {
+            proposal: {
+                title: "Project Proposal",
+                date: "To be confirmed",
+                marks: "10%",
+                desc: "Initial assessment covering the project scope, background, problem statement, objectives, planned methodology, and expected outcomes."
+            },
+            progress1: {
+                title: "Progress Presentation 1",
+                date: "To be confirmed",
+                marks: "15%",
+                desc: "Progress review of the first implementation stage, including architecture, early interface work, and baseline module progress."
+            },
+            progress2: {
+                title: "Progress Presentation 2",
+                date: "To be confirmed",
+                marks: "15%",
+                desc: "Progress review of AI fraud decisioning, offline transaction flow, analytics service, and system integration."
+            },
+            final: {
+                title: "Final Assessment",
+                date: "To be confirmed",
+                marks: "40%",
+                desc: "Final evaluation of the complete TrustiPay prototype, documentation, testing evidence, and research contribution."
+            },
+            viva: {
+                title: "Viva",
+                date: "To be confirmed",
+                marks: "20%",
+                desc: "Individual oral assessment of project understanding, technical contribution, implementation decisions, and research outcomes."
+            }
+        };
 
-    <section>
-      <div class="container">
-        <div class="cta reveal" id="cta">
-          <div class="eyebrow">Ready to build trust into every transaction?</div>
-          <h2>Launch safer, smarter digital payments with TrustiPay</h2>
-          <p>
-            Whether you are a university project team, startup, fintech partner, or innovation program,
-            TrustiPay presents a bold foundation for accessible and resilient digital payment experiences.
-          </p>
-          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
-            <a class="btn btn-primary" href="mailto:hello@trustipay.io">Book a Demo</a>
-            <a class="btn btn-secondary" href="#top">Back to Top</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        const select = document.getElementById("milestone-select");
+        const detailsDiv = document.getElementById("milestone-details");
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> TrustiPay. Inclusive digital payments powered by AI.</div>
-      <div>Project focus: accessibility, fraud protection, multilingual UX, and offline resilience.</div>
-    </div>
-  </footer>
+        select.addEventListener("change", function () {
+            const selected = select.value;
+            if (selected === "none") {
+                detailsDiv.hidden = true;
+                return;
+            }
 
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-    const year = document.getElementById('year');
-    const revealItems = document.querySelectorAll('.reveal');
-
-    year.textContent = new Date().getFullYear();
-
-    menuBtn?.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-
-    navLinks?.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    revealItems.forEach(item => observer.observe(item));
-  </script>
+            const milestone = milestones[selected];
+            document.getElementById("m-title").textContent = milestone.title;
+            document.getElementById("m-date").textContent = milestone.date;
+            document.getElementById("m-marks").textContent = milestone.marks;
+            document.getElementById("m-desc").textContent = milestone.desc;
+            detailsDiv.hidden = false;
+        });
+    </script>
 </body>
 </html>

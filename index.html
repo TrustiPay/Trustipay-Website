@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -28,26 +28,35 @@
             <li><a href="#slides">Slides</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#contact">Contact Us</a></li>
+            <li class="theme-item">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <span class="theme-toggle-track" aria-hidden="true"><span class="theme-toggle-thumb"></span></span>
+                    <span class="theme-toggle-text">Dark</span>
+                </button>
+            </li>
         </ul>
     </nav>
 
     <main id="main-content">
         <header id="home" class="hero section">
+            <div class="hero-orb orb-one" aria-hidden="true"></div>
+            <div class="hero-orb orb-two" aria-hidden="true"></div>
             <div class="container hero-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">AI powered - bilingual - offline enabled</p>
+                <div class="hero-copy reveal-up">
+                    <p class="eyebrow">AI powered • bilingual • offline enabled</p>
                     <h1>Digital payments built on trust, access, and resilience.</h1>
-                    <p class="hero-text">TrustiPay is a prototype digital payment platform that combines safe voice-assisted interaction, adaptive fraud decisioning, controlled offline value transfer, and interpretable financial guidance within one payment lifecycle.</p>
+                    <p class="hero-text">TrustiPay is a research-based digital payment platform designed for emerging-economy conditions where usability, security, connectivity, and financial guidance must work together within one coordinated transaction lifecycle.</p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="#domain">Explore Domain</a>
                         <a class="btn btn-secondary" href="#documents">View Documents</a>
                     </div>
+                    
                 </div>
-                <div class="hero-panel" aria-label="TrustiPay feature summary">
+                <div class="hero-panel reveal-up" aria-label="TrustiPay feature summary">
                     <img src="assets/TrustiPay Logo - 4 - Transparent.png" alt="TrustiPay wordmark" class="hero-logo">
                     <div class="wallet-card">
                         <span class="status-dot"></span>
-                        <p class="wallet-label">Prototype focus</p>
+                        
                         <h2>Inclusive, secure payments</h2>
                         <p>Guided online payments, fraud review, offline syncing, and post-transaction insights.</p>
                     </div>
@@ -61,60 +70,76 @@
             </div>
         </header>
 
-        <section class="section bg-light" aria-labelledby="site-index-title">
-            <div class="container">
-                <div class="section-heading compact">
-                    <p class="eyebrow">Site index</p>
-                    <h2 id="site-index-title">Find each required website area quickly</h2>
-                    <p>The website is organized according to the required project website structure.</p>
-                </div>
-                <div class="index-grid">
-                    <a href="#home">Home</a>
-                    <a href="#domain">Domain</a>
-                    <a href="#milestones">Milestones</a>
-                    <a href="#documents">Documents</a>
-                    <a href="#slides">Slides</a>
-                    <a href="#about">About Us</a>
-                    <a href="#contact">Contact Us</a>
-                </div>
-            </div>
-        </section>
 
         <section id="domain" class="section" aria-labelledby="domain-title">
             <div class="container">
                 <div class="section-heading">
                     <p class="eyebrow">Domain</p>
                     <h2 id="domain-title">Domain details gathered from the literature survey</h2>
-                    <p>TrustiPay studies the combined problem of digital payment accessibility, fraud exposure, unstable connectivity, and the limited decision value of raw transaction records.</p>
+                    <p>TrustiPay studies the combined problem of digital payment accessibility, fraud exposure, unstable connectivity, and the limited decision value of raw transaction records in emerging-economy payment environments.</p>
                 </div>
 
-                <div class="domain-grid">
+                <div class="domain-overview card glow-card">
+                    <div>
+                        <span class="pill">Research focus</span>
+                        <h3>Integrated trust layer for inclusive digital payments</h3>
+                        <p>Most payment applications optimize transaction speed, but TrustiPay focuses on the broader conditions that determine whether people can confidently use digital payments: language accessibility, safe voice guidance, risk-aware transaction approval, offline transaction continuity, and useful financial feedback after payments are completed.</p>
+                    </div>
+                    <div class="domain-kpi-grid" aria-label="Domain focus areas">
+                        <div><strong>Accessibility</strong><span>Bilingual voice-assisted user interaction</span></div>
+                        <div><strong>Security</strong><span>Hybrid fraud detection with policy actions</span></div>
+                        <div><strong>Resilience</strong><span>Offline peer-to-peer transaction workflow</span></div>
+                        <div><strong>Guidance</strong><span>Financial health and behavior analytics</span></div>
+                    </div>
+                </div>
+
+                <div class="domain-grid detailed-domain">
                     <article class="card feature-card span-2">
+                        <span class="card-number">01</span>
                         <h3>Literature Survey</h3>
-                        <p>Digital payment systems improve financial inclusion, but voice-enabled financial systems often lack safety-bounded execution and multilingual support for low-resource languages. Existing fraud detection research uses supervised and anomaly-based machine learning, but real deployments still face class imbalance, concept drift, and false positives. Offline payment research supports device-level processing, local ledgers, and delayed synchronization, but must handle ordering, replay resistance, and double-spend prevention. Financial analytics systems can visualize spending, but many still provide fragmented summaries instead of actionable financial guidance.</p>
+                        <p>Digital payment platforms have improved financial inclusion by making transactions faster and more convenient. However, the literature shows that adoption is still affected by accessibility barriers, especially for visually impaired users, elderly users, and users who need local-language assistance. Voice-enabled systems can reduce interaction difficulty, but they must not allow sensitive financial actions to be committed without strong confirmation.</p>
+                        <p>Fraud detection research has widely used anomaly detection and supervised machine learning. These methods can identify suspicious transaction patterns, but practical payment environments still face class imbalance, concept drift, contextual behavior changes, and false-positive decisions that frustrate legitimate users. TrustiPay therefore treats fraud detection as policy-based transaction decisioning instead of a standalone prediction result.</p>
+                        <p>Offline payment research shows the value of local ledgers, device-level processing, and delayed synchronization. Yet offline systems must still handle duplicate records, replay attempts, transaction ordering, double-spend risks, and integrity validation. Financial analytics research also shows that raw transaction summaries are not enough; users benefit more from interpretable financial indicators and personalized recommendations.</p>
                     </article>
+
                     <article class="card feature-card">
+                        <span class="card-number">02</span>
                         <h3>Research Gap</h3>
-                        <p>Prior work usually treats accessibility, fraud detection, offline payments, and analytics as separate areas. TrustiPay addresses the architectural gap by coordinating them inside one shared transaction lifecycle.</p>
+                        <p>Existing work usually improves one area at a time: accessibility, fraud detection, offline payments, or spending analytics. The gap is the lack of a unified architecture where these capabilities work together inside the same transaction lifecycle. Without integration, accessibility may introduce unsafe automation, offline continuity may bypass risk controls, and analytics may be disconnected from confirmed transaction states.</p>
                     </article>
+
                     <article class="card feature-card">
+                        <span class="card-number">03</span>
                         <h3>Research Problem</h3>
-                        <p>Users need a digital payment platform that remains usable, trustworthy, and secure when language barriers, visual or age-related accessibility needs, fraud risk, and poor connectivity occur together.</p>
+                        <p>How can a digital payment platform support users who face language, accessibility, fraud, and connectivity challenges while still maintaining transaction safety, ledger integrity, and practical financial guidance? TrustiPay addresses this problem by coordinating user interaction, risk scoring, offline synchronization, and analytics through one safety-bounded flow.</p>
                     </article>
+
                     <article class="card feature-card span-2">
+                        <span class="card-number">04</span>
                         <h3>Research Objectives</h3>
-                        <ul class="check-list">
-                            <li>Design a safe bilingual voice-assisted payment experience where sensitive actions still require explicit confirmation.</li>
-                            <li>Build a hybrid fraud decision service that maps risk into allow, OTP challenge, or block actions.</li>
-                            <li>Support offline peer-to-peer transfers through a tamper-evident local ledger and deferred fraud review after synchronization.</li>
-                            <li>Convert confirmed transaction histories into interpretable financial health scores, behavioral profiles, and personalized guidance.</li>
+                        <ul class="check-list two-column-list">
+                            <li>Design a bilingual voice-assisted payment experience that improves accessibility while keeping sensitive actions under explicit user confirmation.</li>
+                            <li>Create a hybrid fraud decision pipeline that combines anomaly-aware scoring, supervised learning, and contextual behavioral signals.</li>
+                            <li>Map transaction risk into practical outcomes: allow low-risk transactions, challenge medium-risk transactions with OTP verification, and block high-risk transactions.</li>
+                            <li>Enable offline peer-to-peer payment continuity using tamper-evident local storage, unique transaction identifiers, signatures, and hash-linked ledger entries.</li>
+                            <li>Synchronize offline transactions through deferred confirmation so that offline records still pass duplicate handling, ordering checks, integrity validation, and fraud review.</li>
+                            <li>Transform confirmed transaction histories into financial health scores, behavior profiles, contributing factors, and personalized recommendations.</li>
                         </ul>
                     </article>
-                    <article class="card feature-card">
+
+                    <article class="card feature-card span-2">
+                        <span class="card-number">05</span>
                         <h3>Methodology</h3>
-                        <p>The project follows a prototype-oriented systems methodology. The Android client manages wallet interaction, confirmation, voice guidance, and temporary local storage. Modular FastAPI services handle fraud and risk evaluation, transaction orchestration with offline support, and financial analytics.</p>
+                        <p>This research follows a prototype-oriented systems methodology. The TrustiPay Android client supports wallet interaction, transaction confirmation, bilingual guidance, and temporary offline storage. Backend responsibilities are separated into modular FastAPI service domains so that fraud scoring, ledger synchronization, and analytics can be tested independently while still operating in one end-to-end lifecycle.</p>
+                        <div class="method-grid">
+                            <div><strong>Online path</strong><span>Voice guidance prepares transactions, explicit confirmation protects commitment, and fraud scoring occurs before final approval.</span></div>
+                            <div><strong>Offline path</strong><span>Disconnected transfers are captured locally, exchanged through peer-to-peer methods, synchronized later, and finalized only after review.</span></div>
+                            <div><strong>Analytics path</strong><span>Only confirmed transaction history is used to generate financial health indicators, behavior profiles, and recommendations.</span></div>
+                        </div>
                     </article>
+
                     <article class="card feature-card">
+                        <span class="card-number">06</span>
                         <h3>Technologies Used</h3>
                         <ul class="tag-list">
                             <li>Android client</li>
@@ -123,9 +148,19 @@
                             <li>Isolation Forest</li>
                             <li>Random Forest</li>
                             <li>OTP verification</li>
-                            <li>QR, Wi-Fi Direct, Bluetooth</li>
+                            <li>QR transfer</li>
+                            <li>Wi-Fi Direct</li>
+                            <li>Bluetooth</li>
                             <li>Hash-linked ledger</li>
+                            <li>Digital signatures</li>
+                            <li>Behavior analytics</li>
                         </ul>
+                    </article>
+
+                    <article class="card feature-card">
+                        <span class="card-number">07</span>
+                        <h3>Expected Contribution</h3>
+                        <p>TrustiPay contributes an implementation-driven architecture for inclusive and security-aware digital payments. Its main contribution is the coordination of guided interaction, adaptive fraud handling, offline transaction resilience, and financial decision support rather than treating these capabilities as isolated add-ons.</p>
                     </article>
                 </div>
             </div>
@@ -172,20 +207,34 @@
 
                 <label for="milestone-select" class="form-label">Choose a milestone</label>
                 <select id="milestone-select" class="dropdown">
-                    <option value="none">-- Select a milestone --</option>
-                    <option value="proposal">Project Proposal</option>
-                    <option value="progress1">Progress Presentation - 1</option>
-                    <option value="progress2">Progress Presentation - 2</option>
-                    <option value="final">Final Assessment</option>
-                    <option value="viva">Viva</option>
-                </select>
+    <option value="none">-- Select a milestone --</option>
+    <option value="proposalPresentation">Proposal Presentation - Completed</option>
+    <option value="progress1">Progress Presentation 1 - Completed</option>
+    <option value="progress2">Progress Presentation 2 - Completed</option>
+    <option value="final">Final Assessment - Not Yet Started</option>
+    <option value="viva">Viva - Not Yet Started</option>
+</select>
 
                 <div id="milestone-details" class="card milestone-card" hidden>
-                    <h3 id="m-title"></h3>
-                    <p><strong>Date:</strong> <span id="m-date"></span></p>
-                    <p><strong>Marks Allocated:</strong> <span id="m-marks"></span></p>
-                    <p><strong>Description:</strong> <span id="m-desc"></span></p>
-                </div>
+    <div class="milestone-header-row">
+        <h3 id="m-title"></h3>
+        <span id="m-status" class="resource-status">Status</span>
+    </div>
+
+    <p><strong>Date:</strong> <span id="m-date"></span></p>
+    <p><strong>Marks Allocated:</strong> <span id="m-marks"></span></p>
+    <p><strong>Description:</strong> <span id="m-desc"></span></p>
+
+    <div class="milestone-actions">
+        <a id="m-panel-comments"
+           class="resource-action"
+           href="#"
+           target="_blank"
+           rel="noopener">
+           View Panel Comments
+        </a>
+    </div>
+</div>
             </div>
         </section>
 
@@ -194,44 +243,44 @@
                 <div class="section-heading">
                     <p class="eyebrow">Documents</p>
                     <h2 id="documents-title">Project documents</h2>
-                    <p>Produced and pending documents are listed as links for review.</p>
+                    <p>Produced and pending documents are listed as review links. Available items use a View action so the file can be opened through OneDrive instead of downloaded.</p>
                 </div>
                 <div class="resource-grid">
                     <article class="resource-card available">
                         <span class="resource-status">Available</span>
                         <h3>TrustiPay Research Paper</h3>
                         <p>AI powered, bilingual and offline enabled digital payment platform research paper.</p>
-                        <a href="documents/TrustiPay-Research-Paper.pdf" download>Download PDF</a>
+                        <a class="resource-action" href="https://mysliit-my.sharepoint.com/:b:/g/personal/it22257390_my_sliit_lk/IQB3Mfit0mG9SaCVXytrDgiFAekL43E8Wud3CxMdqxztm-w?e=Vty8Q0" target="_blank" rel="noopener" data-onedrive-key="researchPaper" aria-label="View TrustiPay Research Paper on OneDrive">View</a>
                     </article>
                     <article class="resource-card pending">
                         <span class="resource-status">Pending</span>
                         <h3>Project Charter</h3>
                         <p>Group charter and scope document.</p>
-                        <a href="#contact" aria-label="Request Project Charter from the team">Request link</a>
+                        <a class="resource-action" href="https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgBJWWFxV94HSJmBGzfmWlMvAfyA9xsyIu-lz5paN0RI_2A?e=fRzZM9" data-onedrive-key="projectCharter" aria-label="Request Project Charter OneDrive link from the team">View</a>
                     </article>
                     <article class="resource-card pending">
-                        <span class="resource-status">Pending</span>
-                        <h3>Proposal Document</h3>
+                        <span class="resource-status">Available</span>
+                        <h3>Proposal Documents</h3>
                         <p>Formal proposal document for the research project.</p>
-                        <a href="#contact" aria-label="Request Proposal Document from the team">Request link</a>
+                        <a class="resource-action" href="https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgAj9NuNdUhHSrenR2ZXw2QOAdFEENpGwrJQk8gAvzREqkg?e=lobPVx" target="_blank" rel="noopener"data-onedrive-key="proposalDocument" aria-label="Request Proposal Document OneDrive link from the team">View</a>
                     </article>
                     <article class="resource-card pending">
-                        <span class="resource-status">Pending</span>
+                        <span class="resource-status">Available</span>
                         <h3>Checklist Documents</h3>
                         <p>Assessment checklist documents and submission records.</p>
-                        <a href="#contact" aria-label="Request Checklist Documents from the team">Request link</a>
+                        <a class="resource-action" href="https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgAGuNtng_BGRqaxmrNZ9qZbAe7Ki33GX6K7WZk8sxxp-zI?e=ouO5Nk" data-onedrive-key="checklistDocuments" aria-label="Request Checklist Documents OneDrive link from the team">View</a>
                     </article>
                     <article class="resource-card pending">
                         <span class="resource-status">Pending</span>
                         <h3>Final Main Document</h3>
                         <p>Main final report document.</p>
-                        <a href="#contact" aria-label="Request Final Main Document from the team">Request link</a>
+                        <a class="resource-action" href="https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgBiqMmtP2w9Q6AfMnsi6-tzAWBIsmtfP9lDMxwqjTVEN5w?e=NkAtG6" data-onedrive-key="finalMainDocument" aria-label="Request Final Main Document OneDrive link from the team">View</a>
                     </article>
                     <article class="resource-card pending">
                         <span class="resource-status">Pending</span>
                         <h3>Individual Final Reports</h3>
                         <p>Individual final documents for group member contributions.</p>
-                        <a href="#contact" aria-label="Request Individual Final Reports from the team">Request link</a>
+                        <a class="resource-action" href="https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgAzgSQ-b9cISINhGhtvAnVyAcaqGQ2fetviRGciQXDYNuU?e=idQLEY" data-onedrive-key="individualFinalReports" aria-label="Request Individual Final Reports OneDrive link from the team">View</a>
                     </article>
                 </div>
             </div>
@@ -242,39 +291,39 @@
                 <div class="section-heading">
                     <p class="eyebrow">Slides of past presentations</p>
                     <h2 id="slides-title">Presentation slides</h2>
-                    <p>This area keeps links for completed presentation decks and placeholders for future presentations.</p>
+                    <p>This area keeps OneDrive view links for completed presentation decks and placeholders for future presentations.</p>
                 </div>
                 <div class="timeline">
                     <article class="timeline-item pending">
                         <span>01</span>
                         <div>
                             <h3>Proposal Presentation</h3>
-                            <p>Status: pending upload.</p>
-                            <a href="#contact">Request slides</a>
+                            <p>Status: Completed</p>
+                            <a class="resource-action" href="https://mysliit-my.sharepoint.com/:p:/g/personal/it22257390_my_sliit_lk/IQCNyr93TXt-Rrm6BorV5ZHvAd3xY-toF_ZP2bYxJsYjUx0?e=sVTX1U" data-onedrive-key="proposalPresentation">View</a>
                         </div>
                     </article>
                     <article class="timeline-item pending">
                         <span>02</span>
                         <div>
                             <h3>Progress Presentation - 1</h3>
-                            <p>Status: pending upload.</p>
-                            <a href="#contact">Request slides</a>
+                            <p>Status: Completed</p>
+                            <a class="resource-action" href="https://mysliit-my.sharepoint.com/:p:/g/personal/it22257390_my_sliit_lk/IQDdwB27-TsxQ4ByBmr7foeOAZUBGotPA375PYtLdEXoKq8?e=keTjo7" data-onedrive-key="progressPresentation1">View</a>
                         </div>
                     </article>
                     <article class="timeline-item pending">
                         <span>03</span>
                         <div>
                             <h3>Progress Presentation - 2</h3>
-                            <p>Status: pending upload.</p>
-                            <a href="#contact">Request slides</a>
+                            <p>Status: Completed</p>
+                            <a class="resource-action" href="https://mysliit-my.sharepoint.com/:b:/g/personal/it22257390_my_sliit_lk/IQCZq911FJVrRK1-0Kj4hnd-AdLopboLgQ8RTu0LFMv6KSI?e=ZKU0aW" data-onedrive-key="progressPresentation2">View</a>
                         </div>
                     </article>
                     <article class="timeline-item pending">
                         <span>04</span>
                         <div>
                             <h3>Final Presentation</h3>
-                            <p>Status: reserved for final presentation deck.</p>
-                            <a href="#contact">Request slides</a>
+                            <p>Status: Not Yet Started</p>
+                            <a class="resource-action" href="https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgAJJikvhRUkQ7p9-iNoCiO1AaHkt5DWvh0XHiKpoWrb9H8?e=cQezNK" data-onedrive-key="finalPresentation">View</a>
                         </div>
                     </article>
                 </div>
@@ -290,25 +339,33 @@
                 </div>
                 <div class="team-grid">
                     <article class="team-card">
-                        <div class="avatar">DS</div>
+                        <div class="avatar">
+    <img src="assets/devram.png" alt="Saparamadu D.D.D.T profile photo">
+</div>
                         <h3>Saparamadu D.D.D.T</h3>
                         <p>Student Researcher</p>
                         <a href="mailto:devramsaparamadu@gmail.com">devramsaparamadu@gmail.com</a>
                     </article>
                     <article class="team-card">
-                        <div class="avatar">KN</div>
-                        <h3>Nadeeshani K.M.I</h3>
-                        <p>Student Researcher</p>
-                        <a href="mailto:imeshanadeeshani761@gmail.com">imeshanadeeshani761@gmail.com</a>
-                    </article>
+    <div class="avatar">
+        <img src="assets/nadeeshani.png" alt="Nadeeshani K.M.I photo">
+    </div>
+    <h3>Nadeeshani K.M.I</h3>
+    <p>Student Researcher</p>
+    <a href="mailto:imeshanadeeshani761@gmail.com">imeshanadeeshani761@gmail.com</a>
+</article>
                     <article class="team-card">
-                        <div class="avatar">CW</div>
+                        <div class="avatar">
+    <img src="assets/chinthana.png" alt="Weligamage C.N profile photo">
+</div>
                         <h3>Weligamage C.N</h3>
                         <p>Student Researcher</p>
                         <a href="mailto:chinthanaweligamage1@gmail.com">chinthanaweligamage1@gmail.com</a>
                     </article>
                     <article class="team-card">
-                        <div class="avatar">DK</div>
+                        <div class="avatar">
+    <img src="assets/dilmani.png" alt="Kiriella K.A.D.N profile photo">
+</div>
                         <h3>Kiriella K.A.D.N</h3>
                         <p>Student Researcher</p>
                         <a href="mailto:dilmanikiriella@gmail.com">dilmanikiriella@gmail.com</a>
@@ -334,17 +391,13 @@
                 <div>
                     <p class="eyebrow">Contact us</p>
                     <h2 id="contact-title">Get in touch with the TrustiPay team</h2>
-                    <p>Use the general email template below for project-related inquiries, document requests, and presentation slide requests.</p>
+                    <p>Use the email below for project-related inquiries, document requests, and presentation slide requests.</p>
                     <div class="contact-list">
-                        <p><strong>General Email:</strong> <a href="mailto:info@trustipay.online">info@trustipay.online</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:info@trustipay.online">trustipay26@gmail.com</a></p>
                         <p><strong>Group ID:</strong> 25-26J-247</p>
-                        <p><strong>General Phone:</strong> To be updated by the project team</p>
+                        
                     </div>
-                    <div class="email-template">
-                        <h3>General email template</h3>
-                        <p><strong>Subject:</strong> TrustiPay Project Inquiry - [Your topic]</p>
-                        <p><strong>Message:</strong> Hello TrustiPay team, I would like to ask about [document / presentation / project information]. Please share the relevant details when available. Thank you.</p>
-                    </div>
+                    
                 </div>
                 <form class="contact-form" action="mailto:info@trustipay.online" method="post" enctype="text/plain">
                     <label>
@@ -373,56 +426,152 @@
     </footer>
 
     <script>
-        const milestones = {
-            proposal: {
-                title: "Project Proposal",
-                date: "To be confirmed",
-                marks: "10%",
-                desc: "Initial assessment covering the project scope, background, problem statement, objectives, planned methodology, and expected outcomes."
-            },
-            progress1: {
-                title: "Progress Presentation 1",
-                date: "To be confirmed",
-                marks: "15%",
-                desc: "Progress review of the first implementation stage, including architecture, early interface work, and baseline module progress."
-            },
-            progress2: {
-                title: "Progress Presentation 2",
-                date: "To be confirmed",
-                marks: "15%",
-                desc: "Progress review of AI fraud decisioning, offline transaction flow, analytics service, and system integration."
-            },
-            final: {
-                title: "Final Assessment",
-                date: "To be confirmed",
-                marks: "40%",
-                desc: "Final evaluation of the complete TrustiPay prototype, documentation, testing evidence, and research contribution."
-            },
-            viva: {
-                title: "Viva",
-                date: "To be confirmed",
-                marks: "20%",
-                desc: "Individual oral assessment of project understanding, technical contribution, implementation decisions, and research outcomes."
-            }
+        const oneDriveLinks = {
+            // Replace these placeholder values with the actual OneDrive share/view URLs.
+            researchPaper: "",
+            projectCharter: "",
+            proposalDocument: "",
+            checklistDocuments: "",
+            finalMainDocument: "",
+            individualFinalReports: "",
+            proposalPresentation: "",
+            progressPresentation1: "",
+            progressPresentation2: "",
+            finalPresentation: ""
         };
+
+        document.querySelectorAll("[data-onedrive-key]").forEach(function (link) {
+            const key = link.getAttribute("data-onedrive-key");
+            const url = oneDriveLinks[key];
+            if (url) {
+                link.href = url;
+                link.target = "_blank";
+                link.rel = "noopener";
+                if (!link.classList.contains("muted-action")) {
+                    link.textContent = "View";
+                }
+            }
+        });
+
+        const milestones = {
+
+
+    proposalPresentation: {
+        title: "Proposal Presentation",
+        status: "Completed",
+        statusClass: "available",
+        date: "To be confirmed",
+        marks: "To be confirmed",
+        desc: "Completed proposal presentation covering the project background, research gap, objectives, proposed solution, and implementation plan.",
+        panelComments: "https://mysliit-my.sharepoint.com/:i:/g/personal/it22257390_my_sliit_lk/IQARnkmm30AMQZ5f1sOqy8BSAY0FW098eNe1IAA0799K-QY?e=NxYp4s"
+    },
+
+    progress1: {
+        title: "Progress Presentation 1",
+        status: "Completed",
+        statusClass: "available",
+        date: "08th January 2026",
+        marks: "15%",
+        desc: "Completed progress review of the first implementation stage, including architecture, early interface work, and baseline module progress.",
+        panelComments: "https://mysliit-my.sharepoint.com/:i:/g/personal/it22257390_my_sliit_lk/IQC4kyHcNNpbSLwv-mDWDNP3AQhnzXkxVtZm_IEN4Vjawdk?e=DRVYyN"
+    },
+
+    progress2: {
+        title: "Progress Presentation 2",
+        status: "Completed",
+        statusClass: "available",
+        date: "03rd March 2026",
+        marks: "18%",
+        desc: "Completed progress review of AI fraud decisioning, offline transaction flow, analytics service, and system integration.",
+        panelComments: "https://mysliit-my.sharepoint.com/:i:/g/personal/it22257390_my_sliit_lk/IQCCMmtKEDk6SZdEW9n-zpQ4AYg3DB-iljqFmGhwh4ujQDg?e=kKITb2"
+    },
+
+    final: {
+        title: "Final Assessment",
+        status: "Not Yet Started",
+        statusClass: "pending",
+        date: "04th May 2026",
+        marks: "10%",
+        desc: "Final evaluation of the complete TrustiPay prototype, documentation, testing evidence, and research contribution. This milestone has not yet started.",
+        panelComments: "https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgDhcrDzkTGlT6S7CrRdW054Afd29WoPPZ8Up6o0mSkg3A8?e=esHct8"
+    },
+
+    viva: {
+        title: "Viva",
+        status: "Not Yet Started",
+        statusClass: "pending",
+        date: "04th May 2026",
+        marks: "10%",
+        desc: "Individual oral assessment of project understanding, technical contribution, implementation decisions, and research outcomes. This milestone has not yet started.",
+        panelComments: "https://mysliit-my.sharepoint.com/:f:/g/personal/it22257390_my_sliit_lk/IgDhcrDzkTGlT6S7CrRdW054Afd29WoPPZ8Up6o0mSkg3A8?e=esHct8"
+    }
+};
+
+        const html = document.documentElement;
+        const themeButton = document.getElementById("theme-toggle");
+        const themeText = document.querySelector(".theme-toggle-text");
+
+        function setTheme(theme) {
+            html.setAttribute("data-theme", theme);
+            localStorage.setItem("trustipay-theme", theme);
+            const isDark = theme === "dark";
+            themeButton.setAttribute("aria-pressed", String(isDark));
+            themeButton.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+            themeText.textContent = isDark ? "Light" : "Dark";
+        }
+
+        const savedTheme = localStorage.getItem("trustipay-theme");
+        const preferredTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        setTheme(savedTheme || preferredTheme);
+
+        themeButton.addEventListener("click", function () {
+            const currentTheme = html.getAttribute("data-theme") || "light";
+            setTheme(currentTheme === "dark" ? "light" : "dark");
+        });
 
         const select = document.getElementById("milestone-select");
         const detailsDiv = document.getElementById("milestone-details");
 
         select.addEventListener("change", function () {
-            const selected = select.value;
-            if (selected === "none") {
-                detailsDiv.hidden = true;
-                return;
-            }
+    const selected = select.value;
 
-            const milestone = milestones[selected];
-            document.getElementById("m-title").textContent = milestone.title;
-            document.getElementById("m-date").textContent = milestone.date;
-            document.getElementById("m-marks").textContent = milestone.marks;
-            document.getElementById("m-desc").textContent = milestone.desc;
-            detailsDiv.hidden = false;
-        });
+    if (selected === "none") {
+        detailsDiv.hidden = true;
+        return;
+    }
+
+    const milestone = milestones[selected];
+
+    document.getElementById("m-title").textContent = milestone.title;
+    document.getElementById("m-date").textContent = milestone.date;
+    document.getElementById("m-marks").textContent = milestone.marks;
+    document.getElementById("m-desc").textContent = milestone.desc;
+
+    const statusBadge = document.getElementById("m-status");
+    statusBadge.textContent = milestone.status;
+    statusBadge.className = "resource-status " + milestone.statusClass;
+
+    const panelButton = document.getElementById("m-panel-comments");
+
+    if (milestone.panelComments && milestone.panelComments.trim() !== "") {
+        panelButton.setAttribute("href", milestone.panelComments);
+        panelButton.setAttribute("target", "_blank");
+        panelButton.setAttribute("rel", "noopener noreferrer");
+        panelButton.textContent = "View Panel Comments";
+        panelButton.classList.remove("muted-action");
+        panelButton.style.pointerEvents = "auto";
+        panelButton.style.opacity = "1";
+    } else {
+        panelButton.setAttribute("href", "#contact");
+        panelButton.removeAttribute("target");
+        panelButton.textContent = "Panel Comments Not Available";
+        panelButton.classList.add("muted-action");
+        panelButton.style.pointerEvents = "auto";
+        panelButton.style.opacity = "0.85";
+    }
+
+    detailsDiv.hidden = false;
+});
     </script>
 </body>
 </html>
